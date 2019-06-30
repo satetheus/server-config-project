@@ -14,14 +14,15 @@ sudo adduser --disabled-password --gecos "" grader --quiet
 
 # add sudo capability to users
 sudo touch /etc/sudoers.d/chris
-sudo sed -i 'vagrant ALL=(ALL) NOPASSWD:ALL' /etc/sudoers.d/chris
+sudo sed -i "vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/chris
 sudo touch /etc/sudoers.d/grader
-sudo sed -i 'vagrant ALL=(ALL) NOPASSWD:ALL' /etc/sudoers.d/grader
+sudo sed -i "vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/grader
 
 # setup & set permissions for authorized keys
 sudo mkdir /.ssh && sudo touch /.ssh/authorized_keys
-sudo sed -i '$a {add user chris public key}' /.ssh/authorized_keys 
-sudo sed -i '$a {add user grader public key}' /.ssh/authorized_keys 
+
+sudo sed -i "$a {add key for chris}" /.ssh/authorized_keys 
+sudo sed -i "$a {add key for grader}" /.ssh/authorized_keys 
 sudo chmod 700 .ssh && sudo chmod 644 /.ssh/authorized_keys
 
 # set firewall defaults
@@ -39,19 +40,19 @@ ufw allow www
 ufw enable -y
 
 # disable root ssh login
-sudo sed -i '/^PermitRootLogin/s/yes/no/' /etc/ssh/sshd_config
+sudo sed -i "/^PermitRootLogin/s/yes/no/" /etc/ssh/sshd_config
 
 # disable password authenication (only keys)
-sudo sed -i '/^PasswordAuthentication/s/yes/no/' /etc/ssh/sshd_config
+sudo sed -i "/^PasswordAuthentication/s/yes/no/" /etc/ssh/sshd_config
 
 # change ssh port to 2222
-sudo sed -i '/^Port/s/22/2222/' /etc/ssh/sshd_config
+sudo sed -i "/^Port/s/22/2222/" /etc/ssh/sshd_config
 
 # allow ssh from newly added users
-sudo sed -i '$a AllowUsers chris grader' /etc/ssh/sshd_config
+sudo sed -i "$a AllowUsers chris grader" /etc/ssh/sshd_config
 
 # install apache
-sudo apt-get install apache2
+sudo apt-get install apache2 apache2-bin
 
 # install mod-wsgi
 sudo apt-get install libapache2-mod-wsgi
@@ -60,7 +61,7 @@ sudo apt-get install libapache2-mod-wsgi
 sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
 
 # configure apache for mod-wsgi
-sudo sed '/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/' /etc/apache2/sites-enabled/000-default.conf
+sudo sed "/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/" /etc/apache2/sites-enabled/000-default.conf
 
 # restart apache
 sudo apache2ctl restart
