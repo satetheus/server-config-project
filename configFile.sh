@@ -47,8 +47,17 @@ sudo sed -i '/^PasswordAuthentication/s/yes/no/' /etc/ssh/sshd_config
 # change ssh port to 2222
 sudo sed -i '/^Port/s/22/2222/' /etc/ssh/sshd_config
 
-# allow newly added users
+# allow ssh from newly added users
 sudo sed -i '$a AllowUsers chris grader' /etc/ssh/sshd_config
 
 # restart ssh
 sudo service ssh restart
+
+# install apache
+sudo apt-get install apache2
+
+# install mod-wsgi
+sudo apt-get install libapache2-mod-wsgi
+
+# configure apache for mod-wsgi
+sudo sed '/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/var\/www\/html\/myapp.wsgi/' /etc/apache2/sites-enabled/000-default.conf
