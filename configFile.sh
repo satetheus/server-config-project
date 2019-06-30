@@ -50,14 +50,20 @@ sudo sed -i '/^Port/s/22/2222/' /etc/ssh/sshd_config
 # allow ssh from newly added users
 sudo sed -i '$a AllowUsers chris grader' /etc/ssh/sshd_config
 
-# restart ssh
-sudo service ssh restart
-
 # install apache
 sudo apt-get install apache2
 
 # install mod-wsgi
 sudo apt-get install libapache2-mod-wsgi
 
+# download catalog project
+sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
+
 # configure apache for mod-wsgi
-sudo sed '/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/var\/www\/html\/myapp.wsgi/' /etc/apache2/sites-enabled/000-default.conf
+sudo sed '/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/' /etc/apache2/sites-enabled/000-default.conf
+
+# restart apache
+sudo apache2ctl restart
+
+# restart ssh
+sudo service ssh restart
