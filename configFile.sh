@@ -57,7 +57,7 @@ sudo sed -i "/^PasswordAuthentication/s/yes/no/" /etc/ssh/sshd_config
 sudo sed -i "/^Port/s/22/2222/" /etc/ssh/sshd_config
 
 # allow ssh from newly added users
-sudo sed -i "$a AllowUsers chris grader" /etc/ssh/sshd_config
+sudo sed -i "\$a AllowUsers chris grader" /etc/ssh/sshd_config
 
 sudo chmod 644 /etc/ssh/sshd_config
 
