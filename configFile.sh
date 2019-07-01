@@ -48,13 +48,13 @@ ufw --force enable
 sudo chmod 777 /etc/ssh/sshd_config
 
 # disable root ssh login
-sudo sed -i "/^#PermitRootLogin/s/yes/no/" /etc/ssh/sshd_config
+sudo sed -i "/PermitRootLogin/ c\PermitRootLogin no" /etc/ssh/sshd_config
 
 # disable password authenication (only keys)
-sudo sed -i "/^#PasswordAuthentication/s/yes/no/" /etc/ssh/sshd_config
+sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication no" /etc/ssh/sshd_config
 
 # change ssh port to 2222
-sudo sed -i "/^Port/s/22/2222/" /etc/ssh/sshd_config
+sudo sed -i "/Port 22/ c\Port 2222" /etc/ssh/sshd_config
 
 # allow ssh from newly added users
 sudo sed -i "\$a AllowUsers chris grader" /etc/ssh/sshd_config
@@ -78,3 +78,6 @@ sudo apache2ctl restart
 
 # restart ssh
 sudo service ssh restart
+
+# restart vm
+sudo restart
