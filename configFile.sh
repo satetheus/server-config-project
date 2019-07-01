@@ -80,4 +80,4 @@ sudo apache2ctl restart
 sudo service ssh restart
 
 # restart vm
-sudo restart
+sudo reboot
