@@ -27,8 +27,8 @@ sudo chmod 440 /etc/sudoers.d/grader
 # setup & set permissions for authorized keys
 sudo mkdir /.ssh && sudo touch /.ssh/authorized_keys
 sudo chmod 777 .ssh && sudo chmod 777 /.ssh/authorized_keys
-sudo sed -i "$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /.ssh/authorized_keys 
-sudo sed -i "$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /.ssh/authorized_keys 
+sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /.ssh/authorized_keys 
+sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /.ssh/authorized_keys 
 sudo chmod 700 .ssh && sudo chmod 644 /.ssh/authorized_keys
 
 # set firewall defaults
