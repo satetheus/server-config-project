@@ -15,13 +15,13 @@ sudo adduser --disabled-password --gecos "" grader --quiet
 # add sudo capability to chris
 sudo touch /etc/sudoers.d/chris
 sudo chmod 777 /etc/sudoers.d/chris
-sudo sed -i "vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/chris
+sudo sed -i "\$a vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/chris
 sudo chmod 440 /etc/sudoers.d/chris
 
 # add sudo capability to grader
 sudo touch /etc/sudoers.d/grader
 sudo chmod 777 /etc/sudoers.d/grader
-sudo sed -i "vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/grader
+sudo sed -i "\$a vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/grader
 sudo chmod 440 /etc/sudoers.d/grader
 
 # setup & set permissions for authorized keys
@@ -48,10 +48,10 @@ ufw --force enable
 sudo chmod 777 /etc/ssh/sshd_config
 
 # disable root ssh login
-sudo sed -i "/^PermitRootLogin/s/yes/no/" /etc/ssh/sshd_config
+sudo sed -i "/^#PermitRootLogin/s/yes/no/" /etc/ssh/sshd_config
 
 # disable password authenication (only keys)
-sudo sed -i "/^PasswordAuthentication/s/yes/no/" /etc/ssh/sshd_config
+sudo sed -i "/^#PasswordAuthentication/s/yes/no/" /etc/ssh/sshd_config
 
 # change ssh port to 2222
 sudo sed -i "/^Port/s/22/2222/" /etc/ssh/sshd_config
@@ -71,7 +71,7 @@ sudo apt-get install libapache2-mod-wsgi -y
 sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
 
 # configure apache for mod-wsgi
-sudo sed "/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/" /etc/apache2/sites-enabled/000-default.conf
+sudo sed -i "/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/" /etc/apache2/sites-enabled/000-default.conf
 
 # restart apache
 sudo apache2ctl restart
