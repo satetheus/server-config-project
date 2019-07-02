@@ -45,10 +45,7 @@ sudo chmod 777 /etc/ssh/sshd_config
 sudo chmod 644 /etc/ssh/sshd_config
 
 # install apache
-sudo apt-get install apache2 apache2-bin -y
-
-# install mod-wsgi
-sudo apt-get install libapache2-mod-wsgi -y
+sudo apt-get install apache2 apache2-bin libapache2-mod-wsgi -y
 
 # download catalog project
 sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
