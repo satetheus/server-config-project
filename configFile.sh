@@ -12,17 +12,9 @@ sudo adduser --disabled-password --gecos "" grader --quiet
 # sudo passwd -e chris
 # sudo passwd -e grader
 
-# add sudo capability to chris
-sudo touch /etc/sudoers.d/chris
-sudo chmod 777 /etc/sudoers.d/chris
-sudo sed -i "\$a vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/chris
-sudo chmod 440 /etc/sudoers.d/chris
-
-# add sudo capability to grader
-sudo touch /etc/sudoers.d/grader
-sudo chmod 777 /etc/sudoers.d/grader
-sudo sed -i "\$a vagrant ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/grader
-sudo chmod 440 /etc/sudoers.d/grader
+# add sudo capability to new users
+sudo usermod -aG chris
+sudo usermod -aG grader
 
 # setup & set permissions for authorized keys
 sudo mkdir /.ssh && sudo touch /.ssh/authorized_keys
