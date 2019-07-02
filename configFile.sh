@@ -45,10 +45,11 @@ sudo chmod 777 /etc/ssh/sshd_config
 sudo chmod 644 /etc/ssh/sshd_config
 
 # install apache
-sudo apt-get install apache2 apache2-bin libapache2-mod-wsgi -y
+sudo apt-get install apache2 apache2-bin libapache2-mod-wsgi python3 python3-pip -y
 
-# download catalog project
+# download catalog project & setup project
 sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
+sudo python3 -m pip install -r /var/www/html/catalog/requirements.txt
 
 # configure apache for mod-wsgi
 sudo sed -i "/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/" /etc/apache2/sites-enabled/000-default.conf
