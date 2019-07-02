@@ -13,8 +13,8 @@ sudo adduser --disabled-password --gecos "" grader --quiet
 # sudo passwd -e grader
 
 # add sudo capability to new users
-sudo usermod -aG chris
-sudo usermod -aG grader
+sudo usermod -aG sudo chris
+sudo usermod -aG sudo grader
 
 # setup & set permissions for authorized keys
 sudo mkdir /home/chris/.ssh && sudo touch /home/chris/.ssh/authorized_keys
