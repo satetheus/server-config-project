@@ -19,10 +19,14 @@ sudo usermod -aG sudo grader
 # setup & set permissions for authorized keys
 sudo mkdir /home/chris/.ssh && sudo touch /home/chris/.ssh/authorized_keys
 sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /home/chris/.ssh/authorized_keys 
+sudo chown -R chris:chris /home/chris
+sudo chown root:root /home/chris
 sudo chmod 700 /home/chris/.ssh && sudo chmod 644 /home/chris/.ssh/authorized_keys
 
 sudo mkdir /home/grader/.ssh && sudo touch /home/grader/.ssh/authorized_keys
 sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /home/grader/.ssh/authorized_keys 
+sudo chown -R grader:grader /home/grader
+sudo chown root:root /home/grader
 sudo chmod 700 /home/grader/.ssh && sudo chmod 644 /home/grader/.ssh/authorized_keys
 
 # set firewall defaults
