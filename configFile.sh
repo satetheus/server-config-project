@@ -12,26 +12,6 @@ sudo adduser --disabled-password --gecos "" grader --quiet
 # sudo passwd -e chris
 # sudo passwd -e grader
 
-<<<<<<< HEAD
-# add sudo capability to chris
-sudo touch /etc/sudoers.d/chris
-sudo chmod 777 /etc/sudoers.d/chris
-sudo sed -i "\$a ubuntu ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/chris
-sudo chmod 440 /etc/sudoers.d/chris
-
-# add sudo capability to grader
-sudo touch /etc/sudoers.d/grader
-sudo chmod 777 /etc/sudoers.d/grader
-sudo sed -i "\$a ubuntu ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/grader
-sudo chmod 440 /etc/sudoers.d/grader
-
-# setup & set permissions for authorized keys
-sudo mkdir /.ssh && sudo touch /.ssh/authorized_keys
-sudo chmod 777 .ssh && sudo chmod 777 /.ssh/authorized_keys
-sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /.ssh/authorized_keys 
-sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /.ssh/authorized_keys 
-sudo chmod 600 .ssh && sudo chmod 600 /.ssh/authorized_keys
-=======
 # add sudo capability to new users
 sudo usermod -aG sudo chris
 sudo usermod -aG sudo grader
@@ -48,7 +28,6 @@ sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7O
 sudo chown -R grader:grader /home/grader
 sudo chown root:root /home/grader
 sudo chmod 700 /home/grader/.ssh && sudo chmod 644 /home/grader/.ssh/authorized_keys
->>>>>>> 52b26b74256daee9c8fdbd8285636fabb23bf189
 
 # set firewall defaults
 ufw default deny incoming
