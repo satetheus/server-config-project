@@ -61,17 +61,18 @@ sudo sed -i "\$a AllowUsers chris grader" /etc/ssh/sshd_config
 
 sudo chmod 644 /etc/ssh/sshd_config
 
-# install apache
-sudo apt-get install apache2 apache2-bin -y
+# install apache & mod-wsgi
+sudo apt-get install apache2 apache2-bin libapache2-mod-wsgi-py3 python3-pip -y
 
-# install mod-wsgi
-sudo apt-get install libapache2-mod-wsgi -y
+# install & setup db
+sudo apt-get install python-mysqldb libmysqlclient-dev
+sudo mysql -u root -p
+CREATE DATABASE catalog;
+CREATE USER catalog_user IDENTIFIED BY 'anotherbadpass';
+GRANT ALL PRIVILEGES ON catalog.* TO 'catalog_user'@'localhost' IDENTIFIED BY 'anotherbadpass';
 
 # download catalog project
 sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
-
-# configure apache for mod-wsgi
-sudo sed -i "/^<\/VirtualHost>/i WSGIScriptAlias \/ \/var\/www\/html\/catalog\/views.py/" /etc/apache2/sites-enabled/000-default.conf
 
 # restart apache
 sudo apache2ctl restart
