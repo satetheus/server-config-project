@@ -12,6 +12,7 @@ sudo adduser --disabled-password --gecos "" grader --quiet
 # sudo passwd -e chris
 # sudo passwd -e grader
 
+<<<<<<< HEAD
 # add sudo capability to chris
 sudo touch /etc/sudoers.d/chris
 sudo chmod 777 /etc/sudoers.d/chris
@@ -30,6 +31,24 @@ sudo chmod 777 .ssh && sudo chmod 777 /.ssh/authorized_keys
 sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /.ssh/authorized_keys 
 sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /.ssh/authorized_keys 
 sudo chmod 600 .ssh && sudo chmod 600 /.ssh/authorized_keys
+=======
+# add sudo capability to new users
+sudo usermod -aG sudo chris
+sudo usermod -aG sudo grader
+
+# setup & set permissions for authorized keys
+sudo mkdir /home/chris/.ssh && sudo touch /home/chris/.ssh/authorized_keys
+sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /home/chris/.ssh/authorized_keys 
+sudo chown -R chris:chris /home/chris
+sudo chown root:root /home/chris
+sudo chmod 700 /home/chris/.ssh && sudo chmod 644 /home/chris/.ssh/authorized_keys
+
+sudo mkdir /home/grader/.ssh && sudo touch /home/grader/.ssh/authorized_keys
+sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /home/grader/.ssh/authorized_keys 
+sudo chown -R grader:grader /home/grader
+sudo chown root:root /home/grader
+sudo chmod 700 /home/grader/.ssh && sudo chmod 644 /home/grader/.ssh/authorized_keys
+>>>>>>> 52b26b74256daee9c8fdbd8285636fabb23bf189
 
 # set firewall defaults
 ufw default deny incoming
@@ -46,19 +65,10 @@ ufw allow www
 ufw --force enable
 
 sudo chmod 777 /etc/ssh/sshd_config
-
-# disable root ssh login
-sudo sed -i "/PermitRootLogin/ c\PermitRootLogin no" /etc/ssh/sshd_config
-
-# disable password authenication (only keys)
-sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication no" /etc/ssh/sshd_config
-
-# change ssh port to 2222
-sudo sed -i "/Port 22/ c\Port 2222" /etc/ssh/sshd_config
-
-# allow ssh from newly added users
-sudo sed -i "\$a AllowUsers chris grader" /etc/ssh/sshd_config
-
+    sudo sed -i "/PermitRootLogin/ c\PermitRootLogin no" /etc/ssh/sshd_config # disable root ssh login
+    sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication no" /etc/ssh/sshd_config # disable password authenication (only keys)
+    sudo sed -i "/Port 22/ c\Port 2222" /etc/ssh/sshd_config # change ssh port to 2222
+    sudo sed -i "\$a AllowUsers chris grader" /etc/ssh/sshd_config # allow ssh from newly added users
 sudo chmod 644 /etc/ssh/sshd_config
 
 # install apache & mod-wsgi
@@ -71,8 +81,9 @@ CREATE DATABASE catalog;
 CREATE USER catalog_user IDENTIFIED BY 'anotherbadpass';
 GRANT ALL PRIVILEGES ON catalog.* TO 'catalog_user'@'localhost' IDENTIFIED BY 'anotherbadpass';
 
-# download catalog project
+# download catalog project & setup project
 sudo git clone https://github.com/satetheus/CatalogProject /var/www/html/catalog
+sudo python3 -m pip install -r /var/www/html/catalog/requirements.txt
 
 # restart apache
 sudo apache2ctl restart
