@@ -37,6 +37,9 @@ Configuration details for the server for the Catalog Project.
     - libmysqlclient-dev
     - python-mysqldb
 - configured apache to run flask apps using [this tutorial](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+    - created FlaskApp/FlaskApp directory for Catalog Project
+    - created FlaskApp.conf
+    - created flaskapp.wsgi
 - pip-installed:
     - virtualenv
     - mysqlclient
