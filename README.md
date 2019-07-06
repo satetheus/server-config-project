@@ -10,7 +10,8 @@ Configuration details for the server for the Catalog Project.
     34.212.27.208
     
 ## Configuration Summary:
-- updated & upgraded packages
+- updated & upgraded packages (apt-get update & dist-upgrade)
+- autoremoved unneeded packages
 - added users chris & grader
 - gave new users sudo capability using usermod
 - added authorized keys for ssh for new users
