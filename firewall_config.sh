@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 # set firewall defaults
 ufw default deny incoming
 ufw default allow outgoing
