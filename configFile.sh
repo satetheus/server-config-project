@@ -4,29 +4,13 @@
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 
-# create users chris & grader
-sudo adduser --disabled-password --gecos "" chris --quiet
-sudo adduser --disabled-password --gecos "" grader --quiet
-
-# required password setup at first login
-# sudo passwd -e chris
-# sudo passwd -e grader
-
-# add sudo capability to new users
-sudo usermod -aG sudo chris
-sudo usermod -aG sudo grader
-
 # setup & set permissions for authorized keys
 sudo mkdir /home/chris/.ssh && sudo touch /home/chris/.ssh/authorized_keys
 sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILMsIXqGZHeRoIpHVbWSbHkA6SO9zqv3hN05t10ah5E9 user@host" /home/chris/.ssh/authorized_keys 
-sudo chown -R chris:chris /home/chris
-sudo chown root:root /home/chris
 sudo chmod 700 /home/chris/.ssh && sudo chmod 644 /home/chris/.ssh/authorized_keys
 
 sudo mkdir /home/grader/.ssh && sudo touch /home/grader/.ssh/authorized_keys
 sudo sed -i "\$a ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICLd9VUb4oo42+5FQoXTdEY3a7OfwsBIZTFM9NZCqq3g user@host" /home/grader/.ssh/authorized_keys 
-sudo chown -R grader:grader /home/grader
-sudo chown root:root /home/grader
 sudo chmod 700 /home/grader/.ssh && sudo chmod 644 /home/grader/.ssh/authorized_keys
 
 sudo chmod 777 /etc/ssh/sshd_config
