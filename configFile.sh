@@ -29,23 +29,6 @@ sudo chown -R grader:grader /home/grader
 sudo chown root:root /home/grader
 sudo chmod 700 /home/grader/.ssh && sudo chmod 644 /home/grader/.ssh/authorized_keys
 
-# set firewall defaults
-ufw default deny incoming
-ufw default allow outgoing
-
-# allow ssh
-ufw allow ssh
-ufw allow 2222/tcp
-
-# allow web connections
-ufw allow www
-
-# allow ntp
-ufw allow 123/tcp
-
-# turn on firewall
-ufw --force enable
-
 sudo chmod 777 /etc/ssh/sshd_config
     sudo sed -i "/PermitRootLogin/ c\PermitRootLogin no" /etc/ssh/sshd_config # disable root ssh login
     sudo sed -i "/PasswordAuthentication/ c\PasswordAuthentication no" /etc/ssh/sshd_config # disable password authenication (only keys)
